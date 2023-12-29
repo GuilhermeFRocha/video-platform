@@ -1,15 +1,19 @@
 import ReactPlayer from "react-player";
-import { useDispatch } from "react-redux";
 import { UseCurrentLesson, next } from "../store/slices/player";
+import { useAppDispatch } from "../store";
 
 export function Video() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function handleNext() {
     dispatch(next());
   }
 
   const { currentLesson } = UseCurrentLesson();
+
+  if (!currentLesson) {
+    return null;
+  }
 
   return (
     <div className="flex-1">
